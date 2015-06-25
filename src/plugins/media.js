@@ -6,7 +6,7 @@ angular.module('ngCordova.plugins.media', [])
   .factory('$cordovaMedia', ['$q', function ($q) {
 
     return {
-      newMedia: function (src) {
+      newMedia: function (src, mediaStatus) {
         var q = $q.defer();
         var mediaStatus = null;
         var media;
@@ -16,9 +16,7 @@ angular.module('ngCordova.plugins.media', [])
             q.resolve(success);
           }, function (error) {
             q.reject(error);
-          }, function (status) {
-            mediaStatus = status;
-          });
+          }, mediaStatus);
 
         // getCurrentPosition NOT WORKING!
         q.promise.getCurrentPosition = function () {
