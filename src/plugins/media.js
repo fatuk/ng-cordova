@@ -8,7 +8,6 @@ angular.module('ngCordova.plugins.media', [])
     return {
       newMedia: function (src, mediaStatus) {
         var q = $q.defer();
-        var mediaStatus = null;
         var media;
 
         media = new Media(src,
