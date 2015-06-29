@@ -4619,9 +4619,8 @@ angular.module('ngCordova.plugins.media', [])
   .factory('$cordovaMedia', ['$q', function ($q) {
 
     return {
-      newMedia: function (src) {
+      newMedia: function (src, mediaStatus) {
         var q = $q.defer();
-        var mediaStatus = null;
         var media;
 
         media = new Media(src,
@@ -4629,9 +4628,7 @@ angular.module('ngCordova.plugins.media', [])
             q.resolve(success);
           }, function (error) {
             q.reject(error);
-          }, function (status) {
-            mediaStatus = status;
-          });
+          }, mediaStatus);
 
         // getCurrentPosition NOT WORKING!
         q.promise.getCurrentPosition = function () {
@@ -5107,7 +5104,7 @@ angular.module('ngCordova.plugins.network', [])
       },
 
       clearOnlineWatch: function () {
-        document.removeEventListener("online", offlineEvent);
+        document.removeEventListener("online", onlineEvent);
         $rootScope.$$listeners["$cordovaNetwork:online"] = [];
       }
     };
